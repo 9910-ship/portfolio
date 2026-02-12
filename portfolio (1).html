@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daisy Njoroge - Customer Service Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a4d2e;
+            --secondary: #4f772d;
+            --accent: #90a955;
+            --light: #ecf39e;
+            --cream: #faf8f3;
+            --text-dark: #2c3e50;
+            --text-light: #6c7a89;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text-dark);
+            background: var(--cream);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: var(--accent);
+            border-radius: 50%;
+            top: -200px;
+            right: -100px;
+            opacity: 0.1;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: var(--light);
+            border-radius: 50%;
+            bottom: -150px;
+            left: -100px;
+            opacity: 0.1;
+            animation: float 15s infinite ease-in-out reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: var(--white);
+            z-index: 1;
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--light);
+            font-weight: 400;
+        }
+
+        .hero .tagline {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--light);
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: none;
+        }
+
+        nav.visible {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--secondary);
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--accent);
+        }
+
+        .skill-category h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-category h3::before {
+            content: '●';
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill-tag {
+            background: var(--cream);
+            color: var(--text-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid var(--accent);
+            transition: all 0.3s;
+        }
+
+        .skill-tag:hover {
+            background: var(--secondary);
+            color: var(--white);
+            border-color: var(--secondary);
+            transform: scale(1.05);
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.6rem;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--secondary);
+            border: 4px solid var(--cream);
+            border-radius: 50%;
+        }
+
+        .timeline-content {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .timeline-content h3 {
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content .company {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content .period {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-content ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .timeline-content li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .timeline-content li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        /* Competencies Grid */
+        .competencies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .competency-card {
+            background: linear-gradient(135deg, var(--white) 0%, var(--cream) 100%);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border-top: 4px solid var(--accent);
+        }
+
+        .competency-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            border-top-color: var(--secondary);
+        }
+
+        .competency-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .competency-card h3 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .competency-card p {
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        .competency-metric {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--light);
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        .quote-mark {
+            font-size: 4rem;
+            color: var(--light);
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-family: Georgia, serif;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .testimonial-role {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 4rem 2rem;
+            border-radius: 30px;
+            color: var(--white);
+        }
+
+        .contact-content h2 {
+            color: var(--white);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.1);
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-link:hover {
+            background: var(--white);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .timeline {
+                padding-left: 1rem;
+            }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="nav">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#competencies">Competencies</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Daisy Njoroge</h1>
+            <p class="subtitle">Remote Customer Service Specialist</p>
+            <p class="tagline">
+                Delivering exceptional customer experiences across multiple channels with 
+                proven expertise in CRM systems, conflict resolution, and remote team collaboration. 
+                Available worldwide | GMT+3
+            </p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                <a href="#experience" class="btn btn-secondary">View Experience</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="about">
+        <div class="section-header fade-in">
+            <h2>Impact at a Glance</h2>
+            <p>Measurable results from delivering world-class customer service</p>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card fade-in">
+                <div class="stat-number">95%+</div>
+                <div class="stat-label">Customer Satisfaction</div>
+            </div>
+            <div class="stat-card fade-in">
+                <div class="stat-number">100+</div>
+                <div class="stat-label">Daily Interactions</div>
+            </div>
+            <div class="stat-card fade-in">
+                <div class="stat-number">&lt;2min</div>
+                <div class="stat-label">Avg Response Time</div>
+            </div>
+            <div class="stat-card fade-in">
+                <div class="stat-number">3+</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="section-header fade-in">
+            <h2>Core Skills & Expertise</h2>
+            <p>Comprehensive skill set for delivering exceptional customer service</p>
+        </div>
+        <div class="skills-container">
+            <div class="skill-category fade-in">
+                <h3>Customer Service Channels</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">Live Chat Support</span>
+                    <span class="skill-tag">Email Support</span>
+                    <span class="skill-tag">Phone Support</span>
+                    <span class="skill-tag">Virtual Events</span>
+                    <span class="skill-tag">In-Person Support</span>
+                </div>
+            </div>
+
+            <div class="skill-category fade-in">
+                <h3>CRM & Tools</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">Zendesk</span>
+                    <span class="skill-tag">Freshdesk</span>
+                    <span class="skill-tag">Slack</span>
+                    <span class="skill-tag">Google Workspace</span>
+                    <span class="skill-tag">Zoom</span>
+                    <span class="skill-tag">Microsoft Office</span>
+                </div>
+            </div>
+
+            <div class="skill-category fade-in">
+                <h3>Core Competencies</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">Conflict Resolution</span>
+                    <span class="skill-tag">First Contact Resolution</span>
+                    <span class="skill-tag">Problem Solving</span>
+                    <span class="skill-tag">Active Listening</span>
+                    <span class="skill-tag">Empathy</span>
+                    <span class="skill-tag">Multitasking</span>
+                </div>
+            </div>
+
+            <div class="skill-category fade-in">
+                <h3>Remote Work</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">Time Zone Flexibility</span>
+                    <span class="skill-tag">Asynchronous Communication</span>
+                    <span class="skill-tag">Self-Management</span>
+                    <span class="skill-tag">Virtual Collaboration</span>
+                    <span class="skill-tag">Documentation</span>
+                </div>
+            </div>
+
+            <div class="skill-category fade-in">
+                <h3>Performance Metrics</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">CSAT Tracking</span>
+                    <span class="skill-tag">SLA Compliance</span>
+                    <span class="skill-tag">FRT Optimization</span>
+                    <span class="skill-tag">Ticket Management</span>
+                    <span class="skill-tag">Data Entry</span>
+                </div>
+            </div>
+
+            <div class="skill-category fade-in">
+                <h3>Additional Strengths</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">Process Improvement</span>
+                    <span class="skill-tag">Cross-Functional Collaboration</span>
+                    <span class="skill-tag">Technical Troubleshooting</span>
+                    <span class="skill-tag">Knowledge Base Management</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Timeline -->
+    <section id="experience">
+        <div class="section-header fade-in">
+            <h2>Professional Experience</h2>
+            <p>A track record of delivering exceptional customer service across diverse industries</p>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item fade-in">
+                <div class="timeline-content">
+                    <h3>Virtual Events Community Manager & Live Chat Support</h3>
+                    <div class="company">Youthify Network / Vijana Tupo</div>
+                    <div class="period">Jun 2021 – Nov 2022 | Remote</div>
+                    <ul>
+                        <li>Provided real-time customer support via live chat and voice to 100+ event participants</li>
+                        <li>Managed high-volume chat queues, handling 20-30 queries per session with 95%+ satisfaction</li>
+                        <li>Troubleshot technical issues remotely, reducing support tickets by 30%</li>
+                        <li>Collaborated with remote team across 3 time zones using Slack and Zoom</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item fade-in">
+                <div class="timeline-content">
+                    <h3>Guest Services & Safety Specialist</h3>
+                    <div class="company">Rixos Gulf Hotel</div>
+                    <div class="period">Nov 2023 – Jul 2025 | Doha, Qatar</div>
+                    <ul>
+                        <li>Served as first point of contact for 300+ hotel guests daily</li>
+                        <li>Resolved 30+ daily guest inquiries with 100% resolution rate</li>
+                        <li>Maintained 4.8/5 guest satisfaction score during peak season</li>
+                        <li>Collaborated cross-functionally with housekeeping, front desk, and F&B teams</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item fade-in">
+                <div class="timeline-content">
+                    <h3>Data Entry Clerk (Customer Data & Case Support)</h3>
+                    <div class="company">AMREF International Kenya</div>
+                    <div class="period">Jan 2021 – Apr 2021 | Remote/On-site</div>
+                    <ul>
+                        <li>Maintained and updated 100+ case files weekly with 99% accuracy</li>
+                        <li>Reduced data gaps by 35% through cross-departmental collaboration</li>
+                        <li>Ensured data integrity for program teams using spreadsheets and internal databases</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item fade-in">
+                <div class="timeline-content">
+                    <h3>Front of House / Customer Service Representative</h3>
+                    <div class="company">Intercontinental Hotel Group Kenya</div>
+                    <div class="period">Oct 2015 – Sep 2016 | Nairobi, Kenya</div>
+                    <ul>
+                        <li>Handled 50+ high-volume guest inquiries daily with 85% first-contact resolution</li>
+                        <li>Developed guest feedback process improving response time by 40%</li>
+                        <li>Processed payments with 99%+ accuracy for 100+ guests per shift</li>
+                        <li>Coordinated with kitchen and service staff, reducing errors by 25%</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competencies Section -->
+    <section id="competencies">
+        <div class="section-header fade-in">
+            <h2>Key Competencies</h2>
+            <p>Proven abilities that drive customer satisfaction and business results</p>
+        </div>
+        <div class="competencies-grid">
+            <div class="competency-card fade-in">
+                <div class="competency-icon">💬</div>
+                <h3>Multi-Channel Support</h3>
+                <p>Expert in delivering seamless customer experiences across live chat, email, phone, and virtual platforms. Adapt communication style to channel and customer needs.</p>
+                <div class="competency-metric">100+ daily interactions managed</div>
+            </div>
+
+            <div class="competency-card fade-in">
+                <div class="competency-icon">⚡</div>
+                <h3>Rapid Response & Resolution</h3>
+                <p>Consistently achieve fast response times while maintaining quality. Skilled at triaging urgent issues and providing clear, actionable solutions under pressure.</p>
+                <div class="competency-metric">&lt;2 minute average response time</div>
+            </div>
+
+            <div class="competency-card fade-in">
+                <div class="competency-icon">🤝</div>
+                <h3>Conflict De-escalation</h3>
+                <p>Proven ability to turn frustrated customers into satisfied advocates. Calm, empathetic approach that resolves issues without escalation.</p>
+                <div class="competency-metric">100% resolution without escalation</div>
+            </div>
+
+            <div class="competency-card fade-in">
+                <div class="competency-icon">🎯</div>
+                <h3>First Contact Resolution</h3>
+                <p>Strong problem-solving skills that enable resolution on first interaction. Reduce repeat contacts and improve customer satisfaction.</p>
+                <div class="competency-metric">85%+ FCR rate achieved</div>
+            </div>
+
+            <div class="competency-card fade-in">
+                <div class="competency-icon">🌍</div>
+                <h3>Remote Team Collaboration</h3>
+                <p>Experienced in working with distributed teams across multiple time zones. Strong asynchronous communication and documentation skills.</p>
+                <div class="competency-metric">3 time zones coordinated</div>
+            </div>
+
+            <div class="competency-card fade-in">
+                <div class="competency-icon">📊</div>
+                <h3>Data Accuracy & Reporting</h3>
+                <p>Meticulous attention to detail in documentation and case management. Maintain accurate records that support decision-making and compliance.</p>
+                <div class="competency-metric">99% data accuracy maintained</div>
+            </div>
+
+            <div class="competency-card fade-in">
+                <div class="competency-icon">🛠️</div>
+                <h3>Technical Troubleshooting</h3>
+                <p>Quick learner of new systems and platforms. Able to diagnose technical issues and guide non-technical users through step-by-step solutions.</p>
+                <div class="competency-metric">30% reduction in support tickets</div>
+            </div>
+
+            <div class="competency-card fade-in">
+                <div class="competency-icon">📈</div>
+                <h3>Process Improvement</h3>
+                <p>Proactive mindset for identifying inefficiencies and implementing solutions. Created feedback systems and documentation that improved team performance.</p>
+                <div class="competency-metric">40% faster response implementation</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" style="background: var(--cream);">
+        <div class="section-header fade-in">
+            <h2>What Others Say</h2>
+            <p>Feedback from colleagues and clients I've worked with</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card fade-in">
+                <div class="quote-mark">"</div>
+                <p class="testimonial-text">
+                    Daisy's ability to manage live chat during our virtual events was exceptional. 
+                    She handled technical issues with patience and kept participants engaged even during 
+                    challenging moments. Her response time and professionalism were consistently outstanding.
+                </p>
+                <div class="testimonial-author">Event Coordinator</div>
+                <div class="testimonial-role">Youthify Network</div>
+            </div>
+
+            <div class="testimonial-card fade-in">
+                <div class="quote-mark">"</div>
+                <p class="testimonial-text">
+                    What impressed me most was Daisy's attention to detail and accuracy in data management. 
+                    She consistently delivered clean, organized records that made our reporting process seamless. 
+                    A reliable team member who takes pride in quality work.
+                </p>
+                <div class="testimonial-author">Program Manager</div>
+                <div class="testimonial-role">AMREF International</div>
+            </div>
+
+            <div class="testimonial-card fade-in">
+                <div class="quote-mark">"</div>
+                <p class="testimonial-text">
+                    Daisy has a natural talent for making guests feel heard and valued. She handled 
+                    complaints with grace and always found solutions that left guests satisfied. Her 
+                    positive attitude and problem-solving skills made her an asset to our front desk team.
+                </p>
+                <div class="testimonial-author">Front Office Supervisor</div>
+                <div class="testimonial-role">IHG Kenya</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="contact-content fade-in">
+            <h2>Let's Work Together</h2>
+            <p>I'm currently seeking remote customer service and virtual assistant opportunities worldwide</p>
+            <div class="contact-links">
+                <a href="mailto:daisywambuinjoroge@gmail.com" class="contact-link">
+                    📧 Email Me
+                </a>
+                <a href="https://www.linkedin.com/in/daisy-wambui-njoroge-182310253" target="_blank" class="contact-link">
+                    💼 LinkedIn
+                </a>
+                <a href="tel:+254791044387" class="contact-link">
+                    📱 +254 791 044 387
+                </a>
+            </div>
+            <p style="margin-top: 2rem; opacity: 0.9;">
+                📍 Based in Nairobi, Kenya (GMT+3) | Available for US, UK, EU, and APAC time zones
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Daisy Njoroge. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; opacity: 0.8;">Remote Customer Service Specialist | Virtual Assistant</p>
+    </footer>
+
+    <script>
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Sticky navigation
+        const nav = document.getElementById('nav');
+        const hero = document.querySelector('.hero');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > hero.offsetHeight - 100) {
+                nav.classList.add('visible');
+            } else {
+                nav.classList.remove('visible');
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
